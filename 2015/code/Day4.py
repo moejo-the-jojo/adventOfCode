@@ -13,6 +13,7 @@ while True:
 
 print("part 1 solution: " + str(i))
 
+
 i = 1
 
 while True:

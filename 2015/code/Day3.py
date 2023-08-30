@@ -21,6 +21,7 @@ for move in data:
 
 print("part 1 solution: " + str(len(visited_houses)))
 
+
 santa = [0,0]
 robo = [0,0]
 

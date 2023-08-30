@@ -12,6 +12,7 @@ for package in single_packages:
 
 print("part 1 solution: " + str(total_paper))
 
+
 total_ribbon = 0
 
 for package in single_packages:

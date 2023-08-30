@@ -11,6 +11,7 @@ for i in data:
 
 print("part 1 solution: " + str(count_up-count_down))
 
+
 count_general = 0
 steps = 0
 
