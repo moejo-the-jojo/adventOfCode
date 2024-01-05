@@ -6,34 +6,45 @@ seperated_blocks = data.split("\n\n")
 seeds_list = seperated_blocks[0].split("\n")[1].split(" ")
 seeds_list = [int(x) for x in seeds_list]
 total_seeds_list = []
+temp_couple = []
 for i in range(len(seeds_list)):
-    if i%2 == 0:
-        temp_start = seeds_list[i]
+    if i%2 == 0 or i == 0:
+        temp_couple.append(seeds_list[i])
     else:
-        for j in range(temp_start, temp_start + seeds_list[i]):
-            total_seeds_list.append(j)
+        temp_couple.append(seeds_list[i])
+        total_seeds_list.append(temp_couple)
+        temp_couple = []
 
 seeds_list = total_seeds_list.copy()
 print(seeds_list)
 
+curr_min = 9999999999999999999999999999999
+
 seperated_blocks = seperated_blocks[1:]
 
-for block in seperated_blocks:
-    new_seedlist = []
-    block = block.split("\n")[1:]
-    temp_seedlist = seeds_list.copy()
-    for line in block:
-        end, start, total_range = [int(x) for x in line.split(" ")]
-        difference = end - start
-        for seed in seeds_list:
-            if seed >= start and seed < (start + total_range):
-                new_seedlist.append(int(seed + difference))
-                temp_seedlist.remove(seed)
-            
-    if len(temp_seedlist) > 0:
-        new_seedlist += temp_seedlist
-    seeds_list = new_seedlist.copy()
-        
+print("here we go6")
+
+for seeds_range in seeds_list:
+    print("new range")
+    new_seedlist = list(range(seeds_range[0], seeds_range[0]+seeds_range[1]))
+    for block in seperated_blocks:
+        # new_seedlist = []
+        epic_seeds = []
+        block = block.split("\n")[1:]
+        temp_seedlist = new_seedlist.copy()
+        for line in block:
+            end, start, total_range = [int(x) for x in line.split(" ")]
+            difference = end - start
+            for j in new_seedlist:
+                if j >= start and j < (start + total_range):
+                    epic_seeds.append(int(j + difference))
+                    temp_seedlist.remove(j)
+                
+        if len(temp_seedlist) > 0:
+            epic_seeds += temp_seedlist
+        new_seedlist = epic_seeds.copy()
+    if sorted(epic_seeds[0]) < curr_min:
+        curr_min = sorted(epic_seeds[0])
     
 
-print(sorted(seeds_list))
+print(curr_min)
