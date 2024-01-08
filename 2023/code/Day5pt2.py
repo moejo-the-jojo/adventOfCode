@@ -1,9 +1,9 @@
 data = open("2023\inputs\day5.txt", "r").read()
 
 
-seperated_blocks = data.split("\n\n")
+separated_blocks = data.split("\n\n")
 
-seeds_list = seperated_blocks[0].split("\n")[1].split(" ")
+seeds_list = separated_blocks[0].split("\n")[1].split(" ")
 seeds_list = [int(x) for x in seeds_list]
 total_seeds_list = []
 temp_couple = []
@@ -16,35 +16,60 @@ for i in range(len(seeds_list)):
         temp_couple = []
 
 seeds_list = total_seeds_list.copy()
-print(seeds_list)
 
-curr_min = 9999999999999999999999999999999
+curr_min = float("inf")
 
-seperated_blocks = seperated_blocks[1:]
+separated_blocks = separated_blocks[1:]
 
 print("here we go6")
 
-for seeds_range in seeds_list:
-    print("new range")
-    new_seedlist = list(range(seeds_range[0], seeds_range[0]+seeds_range[1]))
-    for block in seperated_blocks:
-        # new_seedlist = []
-        epic_seeds = []
-        block = block.split("\n")[1:]
-        temp_seedlist = new_seedlist.copy()
-        for line in block:
-            end, start, total_range = [int(x) for x in line.split(" ")]
-            difference = end - start
-            for j in new_seedlist:
-                if j >= start and j < (start + total_range):
-                    epic_seeds.append(int(j + difference))
-                    temp_seedlist.remove(j)
+# for seeds_range in seeds_list:
+#     print("new range")
+#     #new_seedlist = list(range(seeds_range[0], seeds_range[0]+seeds_range[1]))
+#     for block in separated_blocks:
+#         # new_seedlist = []
+#         epic_seeds = []
+#         block = block.split("\n")[1:]
+#         temp_seedlist = new_seedlist.copy()
+#         for line in block:
+#             end, start, total_range = [int(x) for x in line.split(" ")]
+#             difference = end - start
+#             for j in new_seedlist:
+#                 if j >= start and j < (start + total_range):
+#                     epic_seeds.append(int(j + difference))
+#                     temp_seedlist.remove(j)
                 
-        if len(temp_seedlist) > 0:
-            epic_seeds += temp_seedlist
-        new_seedlist = epic_seeds.copy()
-    if sorted(epic_seeds[0]) < curr_min:
-        curr_min = sorted(epic_seeds[0])
-    
+#         if len(temp_seedlist) > 0:
+#             epic_seeds += temp_seedlist
+#         new_seedlist = epic_seeds.copy()
+#     if sorted(epic_seeds[0]) < curr_min:
+#         curr_min = sorted(epic_seeds[0])
+
+# current seeds == copy
+
+
+
+for block in separated_blocks:
+    block = block.split("\n")[1:]
+    print(block)
+    current_seeds = seeds_list.copy()
+    collecting_seeds = []
+    additional_ranges = []
+    for line in block:
+        end, start, total_range = [int(x) for x in line.split(" ")]
+        delta = end - start
+        for range in seeds_list:
+            range_start = range[0]
+            range_end = range[0] + range[1]
+            #complete
+            if range_start >= start and range_end <= end:
+                # collecting_seeds.append([range[0]+delta, range[1]+delta])
+            #partial left
+            elif start < range_start and end <= range_end:
+            #partial right
+            elif 
+            #partial inner
+            elif range_start < start and end <=
+
 
 print(curr_min)
