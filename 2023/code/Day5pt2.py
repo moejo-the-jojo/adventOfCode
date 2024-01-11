@@ -45,31 +45,38 @@ print("here we go6")
 #     if sorted(epic_seeds[0]) < curr_min:
 #         curr_min = sorted(epic_seeds[0])
 
-# current seeds == copy
-
 
 
 for block in separated_blocks:
     block = block.split("\n")[1:]
     print(block)
-    current_seeds = seeds_list.copy()
     collecting_seeds = []
-    additional_ranges = []
+    ranges_to_go = seeds_list.copy()
     for line in block:
         end, start, total_range = [int(x) for x in line.split(" ")]
         delta = end - start
-        for range in seeds_list:
+        for range in ranges_to_go:
             range_start = range[0]
             range_end = range[0] + range[1]
             #complete
-            if range_start >= start and range_end <= end:
-                # collecting_seeds.append([range[0]+delta, range[1]+delta])
+            if range_start >= start and range_end <= start + delta:
+                collecting_seeds.append([range_start+delta, range_end+delta])
             #partial left
-            elif start < range_start and end <= range_end:
+            elif range_start >= start and range_end >= start + delta:
+                collecting_seeds.append([range_start+delta, start + delta - range_start + delta])
+                ranges_to_go.append([start + delta + 1, range_end - start + delta + 1])
             #partial right
-            elif 
+            elif range_start <= start and range_end <= start + delta:
+                collecting_seeds.append([start + delta, range_end - start + delta])
+                ranges_to_go.append([range_end + 1, start + delta - range_end + 1])
             #partial inner
-            elif range_start < start and end <=
+            elif range_start < start and range_end > start + delta:
+                collecting_seeds.append([range_start + delta, range_end + delta])
+                ranges_to_go.append([range_start, start - range_start])
+                ranges_to_go.append([start + delta + 1, range_end - start + delta + 1])
+            else:
+                collecting_seeds.append([range_start, range_end])
+    seeds_list = collecting_seeds.copy()
 
-
+print(seeds_list)
 print(curr_min)
