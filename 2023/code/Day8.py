@@ -7,7 +7,7 @@ all_paths_list = all_paths.split("\n")
 
 lrlr = lrlr.replace("R", "1").replace("L", "0")
 
-original_lrlr = list(lrlr)
+original_lrlr = list(lrlr).copy()
 
 lrlr = original_lrlr.copy()
 
@@ -102,16 +102,21 @@ while True:
         next_iteration.append(i())
     counter += 1
     
-    lenZ.append(len([x for x in next_iteration if x[2] == "Z"]))
-
+    # lenZ.append(len([x for x in next_iteration if x[2] == "Z"]))
+    # print(len([x for x in next_iteration if x[2] == "Z"]))
+    if len([x for x in next_iteration if x[2] == "Z"]) == 6:
+        print(next_iteration)
+        break
     # if len(next_iteration) == len([x for x in next_iteration if x[2] == "Z"]):
     #     break
+    # print(next_iteration)
 
-    ajo += 1
-    if ajo == 10000:
-        break
+    # ajo += 1
+    # if ajo == 10:
+    #     print(next_iteration)
+    #     break
     starting_functions = [eval(x) for x in next_iteration]
     
-print(sorted(lenZ, reverse=True))
+# print(sorted(lenZ, reverse=True))
 
 print(counter)
