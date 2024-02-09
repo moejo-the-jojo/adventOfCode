@@ -85,26 +85,33 @@ for path in all_paths_list:
 
 starting_functions = [eval(x) for x in starting_paths]
 
-print(lrlr)
+starting_paths_len = len(starting_functions)
+# print(starting_paths_len)
+
+# print(lrlr)
 
 
 
 print(starting_paths)
-ajo = 0
+# ajo = 0
 lenZ = []
 while True:
+    curr_Z_count = 0
     if len(lrlr) == 0:
         lrlr = original_lrlr.copy()
     current_lrlr = lrlr.pop(0)
     next_iteration = []
     
     for i in starting_functions:
-        next_iteration.append(i())
+        j = i()
+        next_iteration.append(j)
+        if j[2] == "Z":
+            curr_Z_count += 1
     counter += 1
     
     # lenZ.append(len([x for x in next_iteration if x[2] == "Z"]))
     # print(len([x for x in next_iteration if x[2] == "Z"]))
-    if len([x for x in next_iteration if x[2] == "Z"]) == 6:
+    if curr_Z_count == starting_paths_len:
         print(next_iteration)
         break
     # if len(next_iteration) == len([x for x in next_iteration if x[2] == "Z"]):
