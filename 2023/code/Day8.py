@@ -1,4 +1,5 @@
 import re
+import math
 
 data = open("2023\inputs\day8.txt", "r").read()
 
@@ -11,7 +12,7 @@ original_lrlr = list(lrlr).copy()
 
 lrlr = original_lrlr.copy()
 
-counter = 0
+counter = 1
 
 
 for path in all_paths_list:
@@ -34,21 +35,16 @@ for path in all_paths_list:
                     return "{path_1}"
     """)
     
-del ZZZ
-
-def ZZZ():
-    pass
-
 curr_function = eval("AAA")
 
 while True:
     next_one = curr_function()
     if next_one == "ZZZ":
-        ZZZ()
         break
     curr_function = eval(next_one)
 
-print("solution pt 1:", counter)
+print("solution pt 1:", counter-1)
+
 
 lrlr, all_paths = data.split("\n\n")
 all_paths_list = all_paths.split("\n")
@@ -59,7 +55,7 @@ original_lrlr = list(lrlr)
 
 lrlr = original_lrlr.copy()
 
-counter = 0
+counter = 1
 
 starting_paths = []
 
@@ -78,52 +74,28 @@ for path in all_paths_list:
             
     """)
     
-# del ZZZ
-
-# def ZZZ():
-#     pass
-
 starting_functions = [eval(x) for x in starting_paths]
 
-starting_paths_len = len(starting_functions)
-# print(starting_paths_len)
-
-# print(lrlr)
-
-
-
-print(starting_paths)
-# ajo = 0
 lenZ = []
-while True:
-    curr_Z_count = 0
+steps_to_Z = []
+
+while len(starting_functions) > 0:
     if len(lrlr) == 0:
         lrlr = original_lrlr.copy()
     current_lrlr = lrlr.pop(0)
+    
     next_iteration = []
     
     for i in starting_functions:
         j = i()
-        next_iteration.append(j)
         if j[2] == "Z":
-            curr_Z_count += 1
+            steps_to_Z.append(counter)
+        else:
+            next_iteration.append(j)
     counter += 1
     
-    # lenZ.append(len([x for x in next_iteration if x[2] == "Z"]))
-    # print(len([x for x in next_iteration if x[2] == "Z"]))
-    if curr_Z_count == starting_paths_len:
-        print(next_iteration)
-        break
-    # if len(next_iteration) == len([x for x in next_iteration if x[2] == "Z"]):
-    #     break
-    # print(next_iteration)
-
-    # ajo += 1
-    # if ajo == 10:
-    #     print(next_iteration)
-    #     break
     starting_functions = [eval(x) for x in next_iteration]
-    
-# print(sorted(lenZ, reverse=True))
 
-print(counter)
+print("solution pt 2: " + str(math.lcm(*steps_to_Z)))
+
+# 10371555451871 is right
