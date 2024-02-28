@@ -97,5 +97,3 @@ while len(starting_functions) > 0:
     starting_functions = [eval(x) for x in next_iteration]
 
 print("solution pt 2: " + str(math.lcm(*steps_to_Z)))
-
-# 10371555451871 is right
