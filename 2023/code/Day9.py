@@ -9,14 +9,28 @@ for i in lines:
 
 # print(int_lines)
 
+sum = 0
 
-for i in int_lines[0:1]:
-    print(i)
-    calculation_list = []
-    temp = []
-    for index, j in enumerate(i):
-        if index+2 > len(i):
+for original_line in int_lines:
+    calculation_list = [original_line]
+    zauber = 0
+    while True:
+        if calculation_list[-1][0] == 0 and calculation_list[-1][1] == 0:
             break
-        temp.append(int(*i[index+1:index+2]) - j)
+        temp = []
+        for element in range(len(calculation_list[-1])-1):
+            temp.append(calculation_list[-1][element+1] - calculation_list[-1][element])
+        calculation_list.append(temp)
 
-    print(temp)
+
+    while len(calculation_list) > 1:
+        last_one = calculation_list.pop()
+        calculation_list[-1].append(calculation_list[-1][-1] + last_one[-1])
+
+    print(calculation_list[-1][-1])
+    sum += calculation_list[-1][-1]
+
+print(sum)
+
+#1782889025 too high
+#1744890533 too low
