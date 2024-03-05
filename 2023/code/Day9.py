@@ -17,6 +17,7 @@ def calculate_next_number(history):
         for number_in_list in range(len(calculation_list[-1])-1):
             temp.append(calculation_list[-1][number_in_list+1] - calculation_list[-1][number_in_list])
         calculation_list.append(temp)
+
     # add next number to all lists of differences, and finally to original list
     while len(calculation_list) > 1:
         last_list = calculation_list.pop()
@@ -34,6 +35,7 @@ def sum_results(result):
 
 all_lines = get_data("2023/inputs/day9.txt")
 sum = 0
+
 
 for single_line in all_lines:
     next_value = calculate_next_number(single_line)
