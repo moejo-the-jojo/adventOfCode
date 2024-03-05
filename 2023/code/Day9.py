@@ -12,12 +12,11 @@ def get_data(filename):
 def calculate_next_number(history):
     # create new lists with differences of last list until the appended list contains only 0
     calculation_list = [history]
-    while calculation_list[-1][0] != 0 or calculation_list[-1][1] != 0:
+    while calculation_list[-1][0] != 0 or calculation_list[-1][-1] != 0:
         temp = []
         for number_in_list in range(len(calculation_list[-1])-1):
             temp.append(calculation_list[-1][number_in_list+1] - calculation_list[-1][number_in_list])
         calculation_list.append(temp)
-    
     # add next number to all lists of differences, and finally to original list
     while len(calculation_list) > 1:
         last_list = calculation_list.pop()
@@ -41,5 +40,3 @@ for single_line in all_lines:
     sum_results(next_value)
 
 print(f"Solution: {sum}")
-
-# 1782889025 is too high
