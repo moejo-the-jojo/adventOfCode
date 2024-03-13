@@ -41,4 +41,25 @@ for single_line in all_lines:
     next_value = calculate_next_number(single_line)
     sum_results(next_value)
 
-print(f"Solution: {sum}")
+print(f"Solution pt1: {sum}")
+
+
+def get_data(filename):
+    data = open(filename, "r").read()
+
+    split_in_lines = data.split("\n")
+    split_each_line_in_numbers = list(map(lambda x: x.split(" "), split_in_lines))
+    ever_number_is_an_int_now = [[int(x) for x in pre_int_line][::-1] for pre_int_line in split_each_line_in_numbers]
+
+    return ever_number_is_an_int_now
+
+
+all_lines = get_data("2023/inputs/day9.txt")
+sum = 0
+
+
+for single_line in all_lines:
+    next_value = calculate_next_number(single_line)
+    sum_results(next_value)
+
+print(f"Solution pt2: {sum}")
