@@ -21,10 +21,6 @@ def find_xmas(x_coord, y_coord):
     for x in [-1, 1]:
         for y in [-1, 1]:
             corner_letters.append(starting_input[x_coord + x][y_coord + y])
-    # corner_letters.append(starting_input[x_coord-1][y_coord-1])
-    # corner_letters.append(starting_input[x_coord-1][y_coord+1])
-    # corner_letters.append(starting_input[x_coord+1][y_coord-1])
-    # corner_letters.append(starting_input[x_coord+1][y_coord+1])
     if sorted(corner_letters) == ["M", "M", "S", "S"] and starting_input[x_coord-1][y_coord-1] != starting_input[x_coord+1][y_coord+1]:
         return 1
     else:
