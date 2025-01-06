@@ -39,7 +39,6 @@ def check_next_field():
     if next_field == "W":
         keep_going = False
         loop_detected = 0
-        # print(visited_coords)
         return
     elif next_field == ".":
         current_coords[0] += current_direction[0]
