@@ -1,4 +1,5 @@
 import itertools
+import sympy.utilities.iterables
 
 def import_data(current_day_nr):
     global data
@@ -14,7 +15,6 @@ def initiate_variables():
     
 def prepare_input(data):
     data = data.split("\n")
-    data = data[5:]
     all_equations = []
     for line in data:
         check_value = line.split(":")[0]
@@ -32,7 +32,7 @@ def check_equation(equation):
     total_results = []
     comb = list(itertools.combinations_with_replacement(["+", "*"], empty_places))
     for i in comb:
-        single_comb = list(itertools.permutations(i))
+        single_comb = list(sympy.utilities.iterables.multiset_permutations(i))
         for j in single_comb:
             if j not in total_combinations:
                 total_combinations.append(j)
@@ -50,7 +50,6 @@ def check_equation(equation):
                 calculation = [new_result, *calculation[3:]]
             except:
                 break
-            print(calculation)
         if calculation not in total_results:
             total_results.append(calculation[0])
     if (int(check_value) in total_results):
@@ -68,7 +67,12 @@ all_equations = prepare_input(data)
 
 for equation in all_equations:
     global total_score
-    print(equation)
+    # print(equation)
     total_score += check_equation(equation)
-    print(total_score)
+    # print(total_score)
 print(total_score)
+
+# print(list(sympy.utilities.iterables.multiset_permutations([*["+"]*10, "*"])))
+
+#249 too low
+#252 too low
